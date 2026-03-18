@@ -59,8 +59,8 @@ exports.handler = async (event) => {
         client_phone: phone || '',
         notes: notes || '',
       },
-      success_url: `${process.env.URL || 'https://staelfogarti.netlify.app'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.URL || 'https://staelfogarti.netlify.app'}/contact.html`,
+      success_url: `${process.env.URL || 'https://staelfogarty.com'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.URL || 'https://staelfogarty.com'}/contact.html`,
     };
 
     // If Stael's connected account is set up, use Stripe Connect with 20% fee

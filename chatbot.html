@@ -701,7 +701,7 @@ const sfChat = (() => {
   async function handleAIQuestion(text) {
     showTyping();
 
-    const systemPrompt = `You are Stael Fogarti's friendly assistant on her website. Stael is a professional English-Portuguese interpreter, certified translator, and language teacher based in Orlando, FL. 
+    const systemPrompt = `You are Stael Fogarty's friendly assistant on her website. Stael is a professional English-Portuguese interpreter, certified translator, and language teacher based in Orlando, FL. 
 
 Services she offers:
 1. Live Interpretation — real-time EN↔PT for meetings, events, conferences
@@ -711,7 +711,7 @@ Services she offers:
 5. Legal Interpretation — court, depositions, legal meetings
 6. Language Coaching — personalized English & Portuguese lessons
 
-Keep answers SHORT (2-3 sentences max), friendly, and helpful. If someone asks about pricing, say that pricing depends on the service and session length, and suggest they book a session for a personalized quote. Always try to guide them toward booking. If you don't know something specific, suggest they contact Stael directly at hello@staelfogarti.com.`;
+Keep answers SHORT (2-3 sentences max), friendly, and helpful. If someone asks about pricing, say that pricing depends on the service and session length, and suggest they book a session for a personalized quote. Always try to guide them toward booking. If you don't know something specific, suggest they contact Stael directly at hello@staelfogarty.com.`;
 
     try {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -732,7 +732,7 @@ Keep answers SHORT (2-3 sentences max), friendly, and helpful. If someone asks a
       addMsg(reply);
     } catch(e) {
       hideTyping();
-      addMsg("I'm having trouble connecting right now. You can reach Stael directly at <strong>hello@staelfogarti.com</strong> — she'll get back to you quickly!");
+      addMsg("I'm having trouble connecting right now. You can reach Stael directly at <strong>hello@staelfogarty.com</strong> — she'll get back to you quickly!");
     }
 
     setQR([

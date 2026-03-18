@@ -16,24 +16,24 @@ exports.handler = async (event) => {
     const account = await stripe.accounts.create({
       type: 'express',
       country: 'US',
-      email: 'hello@staelfogarti.com', // Stael's email
+      email: 'hello@staelfogarty.com', // Stael's email
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
       },
       business_type: 'individual',
       business_profile: {
-        name: 'Stael Fogarti',
+        name: 'Stael Fogarty',
         mcc: '7299', // Miscellaneous personal services
-        url: 'https://staelfogarti.netlify.app',
+        url: 'https://staelfogarty.com',
       },
     });
 
     // Step 2: Create onboarding link
     const accountLink = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: `${process.env.URL || 'https://staelfogarti.netlify.app'}/contact.html`,
-      return_url: `${process.env.URL || 'https://staelfogarti.netlify.app'}/success.html?onboarded=true`,
+      refresh_url: `${process.env.URL || 'https://staelfogarty.com'}/contact.html`,
+      return_url: `${process.env.URL || 'https://staelfogarty.com'}/success.html?onboarded=true`,
       type: 'account_onboarding',
     });
 

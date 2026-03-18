@@ -2,8 +2,8 @@
 // It's called after a successful Stripe payment via webhook or from the success page
 //
 // SETUP: Add these environment variables in Netlify:
-// - STAEL_EMAIL: hello@staelfogarti.com (or her actual email)
-// - NOTIFICATION_FROM: noreply@staelfogarti.com
+// - STAEL_EMAIL: hello@staelfogarty.com (or her actual email)
+// - NOTIFICATION_FROM: noreply@staelfogarty.com
 //
 // For production email delivery, connect one of these:
 // Option A: Netlify Email Integration (free tier available)
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
     const { service, price, date, time, fname, lname, email, phone, notes, sessionId } = data;
 
     const clientName = `${fname} ${lname}`;
-    const staelEmail = process.env.STAEL_EMAIL || 'hello@staelfogarti.com';
+    const staelEmail = process.env.STAEL_EMAIL || 'hello@staelfogarty.com';
 
     // Email content for Stael (notification of new booking)
     const staelSubject = `New Booking: ${service} — ${clientName}`;
@@ -56,11 +56,11 @@ STRIPE SESSION: ${sessionId || 'N/A'}
 
 The client has already paid. Please confirm the session details with them.
 
-— Your Website (staelfogarti.netlify.app)
+— Your Website (staelfogarty.com)
     `.trim();
 
     // Email content for the client (booking confirmation)
-    const clientSubject = `Booking Confirmed — ${service} with Stael Fogarti`;
+    const clientSubject = `Booking Confirmed — ${service} with Stael Fogarty`;
     const clientBody = `
 Hi ${fname},
 
@@ -75,13 +75,13 @@ Stael will reach out to you shortly with any additional details or preparation i
 
 CANCELLATION POLICY:
 - Free cancellation up to 24 hours before your session
-- Contact hello@staelfogarti.com to reschedule or cancel
+- Contact hello@staelfogarty.com to reschedule or cancel
 
 If you have any questions before your session, feel free to reply to this email or contact Stael directly.
 
-Thank you for choosing Stael Fogarti!
+Thank you for choosing Stael Fogarty!
 
-— staelfogarti.netlify.app
+— staelfogarty.com
     `.trim();
 
     // Log the booking (always works, no email provider needed)
@@ -104,7 +104,7 @@ Thank you for choosing Stael Fogarti!
     //
     // // Email to Stael
     // await resend.emails.send({
-    //   from: 'Stael Fogarti Website <noreply@staelfogarti.com>',
+    //   from: 'Stael Fogarty Website <noreply@staelfogarty.com>',
     //   to: staelEmail,
     //   subject: staelSubject,
     //   text: staelBody,
@@ -112,7 +112,7 @@ Thank you for choosing Stael Fogarti!
     //
     // // Email to client
     // await resend.emails.send({
-    //   from: 'Stael Fogarti <noreply@staelfogarti.com>',
+    //   from: 'Stael Fogarty <noreply@staelfogarty.com>',
     //   to: email,
     //   subject: clientSubject,
     //   text: clientBody,
@@ -121,8 +121,8 @@ Thank you for choosing Stael Fogarti!
     // OPTION B: Using SendGrid
     // const sgMail = require('@sendgrid/mail');
     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    // await sgMail.send({ to: staelEmail, from: 'noreply@staelfogarti.com', subject: staelSubject, text: staelBody });
-    // await sgMail.send({ to: email, from: 'noreply@staelfogarti.com', subject: clientSubject, text: clientBody });
+    // await sgMail.send({ to: staelEmail, from: 'noreply@staelfogarty.com', subject: staelSubject, text: staelBody });
+    // await sgMail.send({ to: email, from: 'noreply@staelfogarty.com', subject: clientSubject, text: clientBody });
 
     return {
       statusCode: 200,
