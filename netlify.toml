@@ -3,3 +3,10 @@
 
 [functions]
   node_bundler = "esbuild"
+
+[[notifications]]
+  event = "submission_created"
+  form = "stael-checklist"
+  type = "email"
+  address = "hello@vyn.studio"
+  subject = "✅ Stael Fogarty — Onboarding Checklist Submitted"
