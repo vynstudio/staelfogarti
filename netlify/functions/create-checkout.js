@@ -63,17 +63,15 @@ exports.handler = async (event) => {
       cancel_url: `${process.env.URL || 'https://staelfogarty.com'}/contact.html`,
     };
 
-    // If Stael's connected account is set up, use Stripe Connect with 20% fee
-    // Set STAEL_STRIPE_ACCOUNT_ID in Netlify env vars once she onboards
-    if (process.env.STAEL_STRIPE_ACCOUNT_ID) {
-      const commissionAmount = Math.round(price * 100 * 0.20); // 20% commission in cents
-      sessionParams.payment_intent_data = {
-        application_fee_amount: commissionAmount,
-        transfer_data: {
-          destination: process.env.STAEL_STRIPE_ACCOUNT_ID,
-        },
-      };
-    }
+    // Stripe Connect — 20% platform commission, remainder to Stael
+    const staelAccountId = process.env.STAEL_STRIPE_ACCOUNT_ID || 'acct_1TDSoKQe7O4V0tdq';
+    const commissionAmount = Math.round(price * 100 * 0.20);
+    sessionParams.payment_intent_data = {
+      application_fee_amount: commissionAmount,
+      transfer_data: {
+        destination: staelAccountId,
+      },
+    };
 
     const session = await stripe.checkout.sessions.create(sessionParams);
 
