@@ -205,6 +205,12 @@ a { text-decoration: none; color: inherit; }
 </head>
 <body>
 
+<!-- Netlify Forms detection -->
+<form name="stael-checklist" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="email" />
+  <textarea name="message"></textarea>
+</form>
+
 <nav class="nav">
   <a href="/" class="nav-logo">stael<span>.</span></a>
   <a href="/" class="nav-back">
@@ -568,14 +574,13 @@ async function sendSummary() {
   });
 
   try {
-    const res = await fetch('https://formspree.io/f/xpwzgbqe', {
+    const formData = new FormData();
+    formData.append('form-name', 'stael-checklist');
+    formData.append('email', 'hello@vyn.studio');
+    formData.append('message', body);
+    const res = await fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject: '✅ Stael Fogarty — Onboarding Checklist Complete',
-        message: body,
-        _replyto: 'hello@staelfogarty.com'
-      })
+      body: formData
     });
     if (res.ok) {
       btn.textContent = '✅ Sent to Vyn Studio!';
