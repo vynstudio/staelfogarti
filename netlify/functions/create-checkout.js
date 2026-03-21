@@ -80,7 +80,11 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ url: session.url, sessionId: session.id }),
+      body: JSON.stringify({
+        url: session.url,
+        sessionId: session.id,
+        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || '',
+      }),
     };
   } catch (err) {
     console.error('Stripe error:', err);
