@@ -252,7 +252,104 @@ textarea.form-input{resize:vertical;min-height:80px}
               <span class="so-icon">🎙️</span>
               <div class="so-info"><h4>Live Interpretation</h4><p>$65/hr</p></div>
             </div>
-            <div class="service-opt" data-service=font-size:1.05rem">
+            </div>
+            <div class="service-opt" data-service="Virtual Session" data-price="55" data-unit="hr" onclick="selectService(this)">
+              <span class="so-icon">💻</span>
+              <div class="so-info"><h4>Virtual Session</h4><p>$55/hr</p></div>
+            </div>
+            <div class="service-opt" data-service="Medical Interpretation" data-price="75" data-unit="hr" onclick="selectService(this)">
+              <span class="so-icon">🏥</span>
+              <div class="so-info"><h4>Medical Interpretation</h4><p>$75/hr</p></div>
+            </div>
+            <div class="service-opt" data-service="Legal Interpretation" data-price="85" data-unit="hr" onclick="selectService(this)">
+              <span class="so-icon">⚖️</span>
+              <div class="so-info"><h4>Legal Interpretation</h4><p>$85/hr</p></div>
+            </div>
+            <div class="service-opt" data-service="Language Coaching" data-price="50" data-unit="session" onclick="selectService(this)">
+              <span class="so-icon">📚</span>
+              <div class="so-info"><h4>Language Coaching</h4><p>$50/session</p></div>
+            </div>
+          </div>
+          <div class="form-btns">
+            <button class="btn btn-primary" id="btn1" disabled onclick="goStep(2)">Continue <span class="btn-icon">→</span></button>
+          </div>
+        </div>
+
+        <!-- Step 2: Date & Time -->
+        <div class="form-step" id="step2">
+          <div class="form-title">Pick a date</div>
+          <div class="form-subtitle">Select an available date for your session.</div>
+          <div class="date-grid" id="dateGrid"></div>
+
+          <div style="margin-top:28px">
+            <div class="form-title" style="font-size:1.15rem">Pick a time</div>
+            <div class="form-subtitle">All times are Eastern (ET).</div>
+            <div class="time-grid" id="timeGrid">
+              <div class="time-opt" onclick="selectTime(this)">9:00 AM</div>
+              <div class="time-opt" onclick="selectTime(this)">10:00 AM</div>
+              <div class="time-opt" onclick="selectTime(this)">11:00 AM</div>
+              <div class="time-opt" onclick="selectTime(this)">12:00 PM</div>
+              <div class="time-opt" onclick="selectTime(this)">1:00 PM</div>
+              <div class="time-opt" onclick="selectTime(this)">2:00 PM</div>
+              <div class="time-opt" onclick="selectTime(this)">3:00 PM</div>
+              <div class="time-opt" onclick="selectTime(this)">4:00 PM</div>
+            </div>
+          </div>
+
+          <div class="form-btns">
+            <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-primary" id="btn2" disabled onclick="goStep(3)">Continue <span class="btn-icon">→</span></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Your Info -->
+        <div class="form-step" id="step3">
+          <div class="form-title">Your information</div>
+          <div class="form-subtitle">Tell us a bit about yourself so Stael can prepare for your session.</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              <input type="text" class="form-input" id="fname" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              <input type="text" class="form-input" id="lname" placeholder="Doe" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-input" id="email" placeholder="jane@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-input" id="phone" placeholder="(555) 555-5555">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Notes for Stael (optional)</label>
+              <textarea class="form-input" id="notes" placeholder="Any details about your session, special requirements, or questions..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-btns">
+            <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-primary" id="btn3" onclick="goStep(4)">Review Booking <span class="btn-icon">→</span></button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Pay -->
+        <div class="form-step" id="step4">
+          <div class="form-title">Review & confirm</div>
+          <div class="form-subtitle">Double-check everything looks good before submitting.</div>
+
+          <div class="confirm-details" id="reviewDetails"></div>
+
+          <div class="form-btns" style="justify-content:center">
+            <button class="btn btn-ghost" onclick="goStep(3)">← Back</button>
+            <button class="btn btn-primary" id="btnPay" onclick="submitBooking()" style="padding:16px 48px;font-size:1.05rem">
               Confirm & Pay <span class="btn-icon">→</span>
             </button>
           </div>
@@ -328,10 +425,10 @@ textarea.form-input{resize:vertical;min-height:80px}
         <p style="margin-top:6px;font-size:0.82rem">Typically replies within a few hours</p>
       </div>
       <div class="ci-card reveal reveal-delay-2">
-        <div class="ci-icon" style="background:var(--peach-wash)">🗓️</div>
-        <h3>Book Online</h3>
-        <p>Use the form above to book and pay instantly</p>
-        <p style="margin-top:6px;font-size:0.82rem">Available 24/7 — instant confirmation</p>
+        <div class="ci-icon" style="background:var(--peach-wash)">📱</div>
+        <h3>Phone</h3>
+        <p><a href="tel:+14070000000">(407) 000-0000</a></p>
+        <p style="margin-top:6px;font-size:0.82rem">Mon–Fri, 9AM–5PM ET</p>
       </div>
       <div class="ci-card reveal reveal-delay-3">
         <div class="ci-icon" style="background:var(--mint-wash)">📍</div>
@@ -356,7 +453,7 @@ textarea.form-input{resize:vertical;min-height:80px}
           <a href="#" class="social-link">in</a>
         </div>
       </div>
-      <div class="footer-col"><h4>Services</h4><ul class="footer-links"><li><a href="services/live-interpretation.html">Live Interpretation</a></li><li><a href="services/virtual-sessions.html">Virtual Sessions</a></li><li><a href="services/medical-interpretation.html">Medical Interpretation</a></li><li><a href="services/legal-interpretation.html">Legal Interpretation</a></li><li><a href="services/language-coaching.html">Language Coaching</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul class="footer-links"><li><a href="services/live-interpretation.html">Live Interpretation</a></li><li><a href="services/document-translation.html">Document Translation</a></li><li><a href="services/virtual-sessions.html">Virtual Sessions</a></li><li><a href="services/medical-interpretation.html">Medical Interpretation</a></li><li><a href="services/legal-interpretation.html">Legal Interpretation</a></li><li><a href="services/language-coaching.html">Language Coaching</a></li></ul></div>
       <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="index.html#process">How It Works</a></li><li><a href="index.html#testimonials">Testimonials</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4>Contact</h4><ul class="footer-links"><li><a href="mailto:hello@staelfogarty.com">hello@staelfogarty.com</a></li><li><a href="#">Orlando, FL</a></li></ul></div>
     </div>
@@ -571,7 +668,6 @@ revealEls.forEach(el => observer.observe(el));
   const name  = params.get('name');
   const email = params.get('email');
 
-  // Pre-select service
   if (svc) {
     const opts = document.querySelectorAll('.service-opt');
     opts.forEach(el => {
@@ -582,38 +678,17 @@ revealEls.forEach(el => observer.observe(el));
     });
   }
 
-  // Pre-fill name
   if (name) {
     const parts = name.trim().split(' ');
     const fn = document.getElementById('fname');
     const ln = document.getElementById('lname');
     if (fn) fn.value = parts[0] || '';
     if (ln) ln.value = parts.slice(1).join(' ') || '';
-    // Update booking state
-    setTimeout(() => {
-      if (fn) fn.dispatchEvent(new Event('input'));
-      if (ln) ln.dispatchEvent(new Event('input'));
-    }, 100);
   }
 
-  // Pre-fill email
   if (email) {
     const em = document.getElementById('email');
-    if (em) {
-      em.value = email;
-      setTimeout(() => em.dispatchEvent(new Event('input')), 100);
-    }
-  }
-
-  // Show a welcome message if coming from chatbot
-  if (name && email) {
-    setTimeout(() => {
-      const hero = document.querySelector('.contact-hero p, .page-hero p, .hero-sub');
-      if (hero) {
-        const first = name.split(' ')[0];
-        hero.innerHTML = `Welcome back, <strong>${first}</strong>! Pick your date & time below and you're all set. 🎉`;
-      }
-    }, 200);
+    if (em) em.value = email;
   }
 })();
 </script>
