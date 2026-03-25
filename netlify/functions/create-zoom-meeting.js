@@ -191,8 +191,17 @@ exports.handler = async (event) => {
           body: `Hi ${fname},\n\nYour session with Stael is confirmed!\n\nSERVICE: ${service}\nDATE: ${date}\nTIME: ${time} ET\nPRICE: $${price}${zoomSection}\n${isVirtual && zoomLink ? 'Click the Zoom link above to join at the scheduled time.' : isVirtual ? 'Stael will send your Zoom link before the session.' : 'Stael will meet you in person and confirm the location details.'}\n\nCANCELLATION: Free cancellation up to 24 hours before your session.\nContact: hello@staelfogarty.com\n\nThank you for choosing Stael Gissoni!\n\n— staelfogarty.com`,
         });
 
+        // Notification to Vyn Studio
+        const vynEmail = process.env.VYN_EMAIL || 'hello@vyn.studio';
+        await sendEmail(gmail, {
+          from: `Stael Gissoni Site <${STAEL_EMAIL}>`,
+          to: vynEmail,
+          subject: `💰 New Booking: ${service} — ${clientName} — $${price}`,
+          body: `New booking on staelfogarty.com!\n\nSERVICE: ${service}\nCLIENT: ${clientName}\nEMAIL: ${email}\nDATE: ${date}\nTIME: ${time} ET\nPRICE: $${price}\nCOMMISSION (20%): $${Math.round(price * 0.20 * 100) / 100}${zoomSection}\nNOTES: ${notes || 'None'}\nSTRIPE: ${sessionId || 'N/A'}\n${calendarEventLink ? '\nCalendar: ' + calendarEventLink : ''}\n\n— staelfogarty.com`,
+        });
+
         emailsSent = true;
-        console.log('✓ Emails sent via Gmail');
+        console.log('✓ Emails sent via Gmail + Vyn Studio notified');
       } catch (e) {
         console.error('Gmail error:', e.message);
       }
