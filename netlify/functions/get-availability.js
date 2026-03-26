@@ -68,7 +68,7 @@ exports.handler = async (event) => {
 
     for (let i = 0; i < daysAhead; i++) {
       // Skip Sundays
-      if (d.getDay() === 0) { d.setDate(d.getDate() + 1); continue; }
+      if (d.getDay() === 0 || d.getDay() === 6) { d.setDate(d.getDate() + 1); continue; }
 
       const dateKey = d.toISOString().split('T')[0];
       const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: TIMEZONE });
@@ -147,7 +147,7 @@ function getMockAvailability(daysAhead) {
   let count = 0;
 
   while (count < daysAhead) {
-    if (d.getDay() !== 0) {
+    if (d.getDay() !== 0 && d.getDay() !== 6) {
       const dateKey = d.toISOString().split('T')[0];
       const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       availability[dateKey] = { label: dayLabel, slots: TIME_SLOTS };
