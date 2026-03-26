@@ -102,11 +102,21 @@ exports.handler = async (event) => {
 
   } catch (err) {
     console.error('Availability error:', err.message);
+    console.error('Full error:', JSON.stringify(err, null, 2));
     // Fall back to mock on error
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ availability: getMockAvailability(14), source: 'fallback', error: err.message }),
+      body: JSON.stringify({ 
+        availability: getMockAvailability(14), 
+        source: 'fallback', 
+        error: err.message,
+        debug: {
+          hasServiceAccount: !!process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+          impersonate: process.env.GOOGLE_IMPERSONATE || 'not set',
+          saEmail: (() => { try { return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}').client_email || 'not found'; } catch(e) { return 'parse error'; } })()
+        }
+      }),
     };
   }
 };
