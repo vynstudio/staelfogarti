@@ -51,6 +51,7 @@ exports.handler = async (event) => {
           ],
           subject: impersonate,
         });
+        googleAuth.projectId = saKey.project_id;
         await googleAuth.authorize();
         console.log('✓ Google auth OK — impersonating', impersonate);
       } catch (e) {

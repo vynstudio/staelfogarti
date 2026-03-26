@@ -24,7 +24,7 @@ exports.handler = async (event) => {
       scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
       subject: process.env.GOOGLE_IMPERSONATE || 'hello@staelfogarty.com',
     });
-
+    auth.projectId = saKey.project_id;
     const token = await auth.authorize();
     result.authTest = 'SUCCESS — token obtained';
     result.tokenType = token.token_type;

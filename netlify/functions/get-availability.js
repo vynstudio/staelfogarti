@@ -43,6 +43,8 @@ exports.handler = async (event) => {
       scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
       subject: calendarId,
     });
+    // Force correct project — prevents inheriting Toro Movers quota project
+    auth.projectId = saKey.project_id;
     await auth.authorize();
 
     const calendar = google.calendar({ version: 'v3', auth });
