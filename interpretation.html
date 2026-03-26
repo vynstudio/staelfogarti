@@ -157,7 +157,15 @@ h1.hero-h1 em{font-style:italic;color:var(--blue)}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
+@media(min-width:901px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
+/* Equal height */
+.svc-grid{align-items:stretch}
+.svc-card{display:flex;flex-direction:column}
+.svc-card-inner{display:flex;flex-direction:column;height:100%}
+.svc-card p{flex:1}
+.svc-footer{margin-top:auto}
 @media(max-width:600px){
   .svc-grid{grid-template-columns:1fr!important}
   .svc-grid .svc-card[style*="grid-column:span 2"]{grid-column:span 1!important}
@@ -301,10 +309,6 @@ h1.hero-h1 em{font-style:italic;color:var(--blue)}
         </div>
       </div>
 
-    </div>
-
-    <div class="svc-grid" style="max-width:380px;margin:24px auto 0">
-
       <div class="svc-card blue reveal reveal-delay-1">
         <div class="svc-card-inner">
           <div class="svc-icon blue">⚖️</div>
@@ -312,7 +316,7 @@ h1.hero-h1 em{font-style:italic;color:var(--blue)}
           <h3>Immigration Services</h3>
           <p>Court depositions, immigration hearings, Green Card interviews, legal meetings and USCIS appointments.</p>
           <div class="svc-features">
-                        <div class="svc-feat"><span class="svc-feat-dot blue"></span>Court depositions</div>
+            <div class="svc-feat"><span class="svc-feat-dot blue"></span>Court depositions</div>
             <div class="svc-feat"><span class="svc-feat-dot blue"></span>Immigration hearings & Green Card interviews</div>
             <div class="svc-feat"><span class="svc-feat-dot blue"></span>Legal meetings & USCIS appointments</div>
           </div>
