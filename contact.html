@@ -314,9 +314,18 @@ textarea.form-input{resize:vertical;min-height:72px}
             </div>
           </div>
 
-          <div id="interpDisclaimer" style="display:none;margin-top:16px;padding:14px 16px;background:#EBF2FA;border-radius:10px;border-left:4px solid #5B8EC9">
-            <p style="font-size:.88rem;color:#2A2A3A;font-weight:600;margin:0 0 4px">⏱️ 2-hour minimum booking</p>
-            <p style="font-size:.82rem;color:#5B8EC9;margin:0">This interpretation service requires a minimum booking of 2 hours. Your session will be booked for 2 hours automatically.</p>
+          <div id="interpDisclaimer" style="display:none;margin-top:16px;padding:16px 18px;background:#EBF2FA;border-radius:12px;border-left:4px solid #5B8EC9">
+            <p style="font-size:.88rem;color:#2A2A3A;font-weight:700;margin:0 0 4px">⏱️ 2-hour minimum booking</p>
+            <p style="font-size:.82rem;color:#4A78B0;margin:0 0 14px">This interpretation service requires a minimum of 2 hours. Add more hours if needed.</p>
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:.85rem;font-weight:600;color:#2A2A3A">Hours needed:</span>
+              <div style="display:flex;align-items:center;gap:0;border:1.5px solid #5B8EC9;border-radius:8px;overflow:hidden;background:#fff">
+                <button onclick="changeHours(-1)" style="width:36px;height:36px;border:none;background:none;font-size:1.2rem;cursor:pointer;color:#5B8EC9;font-weight:700;display:flex;align-items:center;justify-content:center" type="button">−</button>
+                <span id="hoursDisplay" style="min-width:32px;text-align:center;font-size:1rem;font-weight:700;color:#2A2A3A;padding:0 4px">2</span>
+                <button onclick="changeHours(1)" style="width:36px;height:36px;border:none;background:none;font-size:1.2rem;cursor:pointer;color:#5B8EC9;font-weight:700;display:flex;align-items:center;justify-content:center" type="button">+</button>
+              </div>
+              <span id="hoursTotalDisplay" style="font-size:.9rem;font-weight:700;color:#2A2A3A"></span>
+            </div>
           </div>
 
           <div class="form-btns">
@@ -529,6 +538,19 @@ async function loadAvailability(){
 loadAvailability();
 
 // ── Selections ──
+function changeHours(delta){
+  if(!B.minHours) return;
+  const min = B.minHours;
+  const newHours = Math.max(min, (B.hours||min) + delta);
+  B.hours = newHours;
+  B.price = B.pricePerHr * newHours;
+  const disp = document.getElementById('hoursDisplay');
+  const total = document.getElementById('hoursTotalDisplay');
+  if(disp) disp.textContent = newHours;
+  if(total) total.textContent = '$' + (B.pricePerHr * newHours).toFixed(0);
+  updateSummary();
+}
+
 function selectService(el){
   document.querySelectorAll('.service-opt').forEach(o=>o.classList.remove('selected'));
   el.classList.add('selected');
@@ -539,9 +561,13 @@ function selectService(el){
   B.hours=B.minHours;
   B.price=B.pricePerHr*B.hours;
   document.getElementById('btn1').disabled=false;
-  // Show 2-hour disclaimer for interpretation services
+  // Show 2-hour disclaimer + hours selector for interpretation services
   const disc=document.getElementById('interpDisclaimer');
   if(disc) disc.style.display=B.minHours>=2?'block':'none';
+  const disp=document.getElementById('hoursDisplay');
+  const total=document.getElementById('hoursTotalDisplay');
+  if(disp) disp.textContent=B.hours;
+  if(total) total.textContent='$'+(B.pricePerHr*B.hours).toFixed(0);
   updateSummary();
 }
 function selectDate(el){
