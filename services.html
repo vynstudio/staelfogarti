@@ -163,11 +163,11 @@ img{max-width:100%;display:block}
     <span></span><span></span><span></span>
   </button>
   <div class="nav-menu" id="navMenu">
-    <a href="about.html" class="nav-link">About</a>
+    <a href="about.html" class="nav-link" data-i18n="nav_about">About</a>
     <a href="services.html" class="nav-link active">Services</a>
-    <a href="blog.html" class="nav-link">Blog</a>
-    <a href="index.html#faq" class="nav-link">FAQ</a>
-    <a href="contact.html" class="nav-link nav-cta">Book a Session</a>
+    <a href="blog.html" class="nav-link" data-i18n="nav_blog">Blog</a>
+    <a href="index.html#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
+    <button id="langToggle" onclick="I18N.toggle()" style="background:transparent;border:1.5px solid var(--blue-light);color:var(--blue);border-radius:var(--radius-pill);padding:7px 16px;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;margin-right:4px" aria-label="Mudar para Português">PT</button><a href="contact.html" class="nav-link nav-cta" data-i18n="nav_book">Book a Session</a>
   </div>
 </nav>
 
@@ -190,7 +190,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon blue">🎙️</div>
           <span class="svc-tag blue">In-Person</span>
-          <h3>Live Interpretation</h3>
+          <h3 data-i18n="svc_live_name">Live Interpretation</h3>
           <p>Real-time English ↔ Portuguese for meetings, events, and conferences. I come to you.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot blue"></span>Meetings & conferences</div>
@@ -209,7 +209,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon mint">💻</div>
           <span class="svc-tag mint">Remote</span>
-          <h3>Virtual Sessions</h3>
+          <h3 data-i18n="svc_virtual_name">Virtual Sessions</h3>
           <p>Full interpretation via Zoom, Google Meet, or phone — same quality, no location limits.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot mint"></span>Zoom, Meet, or phone</div>
@@ -228,7 +228,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon lav">🏥</div>
           <span class="svc-tag lav">Specialized</span>
-          <h3>Medical Interpretation</h3>
+          <h3 data-i18n="svc_medical_name">Medical Interpretation</h3>
           <p>Compassionate, HIPAA-aware interpretation for healthcare appointments and consultations.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot lav"></span>Doctor & hospital visits</div>
@@ -251,7 +251,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon blue">⚖️</div>
           <span class="svc-tag blue">Legal</span>
-          <h3>Legal Interpretation</h3>
+          <h3 data-i18n="svc_legal_name">Legal Interpretation</h3>
           <p>Precise, confidential interpretation for courts, depositions, attorney meetings, and immigration proceedings.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot blue"></span>Court & depositions</div>
@@ -270,7 +270,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon peach">📚</div>
           <span class="svc-tag peach">Teaching</span>
-          <h3>1/1 Private Lessons</h3>
+          <h3 data-i18n="svc_private_name">1/1 Private Lessons</h3>
           <p>Personalized English or Portuguese lessons built around your goals, pace, and learning style.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot peach"></span>All levels welcome</div>
@@ -292,7 +292,7 @@ img{max-width:100%;display:block}
         <div class="svc-card-inner">
           <div class="svc-icon mint">🇺🇸</div>
           <span class="svc-tag mint">Immigration</span>
-          <h3>Immigration & Citizenship Prep</h3>
+          <h3 data-i18n="svc_immigration_name">Immigration & Citizenship Prep</h3>
           <p>Comprehensive preparation for green card interviews, citizenship tests, and USCIS appointments — in English and Portuguese.</p>
           <div class="svc-features">
             <div class="svc-feat"><span class="svc-feat-dot mint"></span>Green card interview prep</div>
@@ -317,7 +317,7 @@ img{max-width:100%;display:block}
         <h2>Not sure which service fits?</h2>
         <p>Book a free 10-minute consultation and Stael will help you figure out exactly what you need.</p>
       </div>
-      <a href="contact.html" class="btn btn-primary">Let's Talk →</a>
+      <a href="contact.html" class="btn btn-primary" data-i18n="cta_talk">Let's Talk →</a>
     </div>
   </div>
 </section>
@@ -389,5 +389,6 @@ const revealEls=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
 revealEls.forEach(el=>observer.observe(el));
 </script>
+<script src="/lang.js"></script>
 </body>
 </html>

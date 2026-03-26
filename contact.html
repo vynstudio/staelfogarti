@@ -208,11 +208,11 @@ textarea.form-input{resize:vertical;min-height:72px}
   <a href="index.html" class="nav-logo">stael<span>.</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   <div class="nav-menu" id="navMenu">
-    <a href="about.html" class="nav-link">About</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="blog.html" class="nav-link">Blog</a>
-    <a href="index.html#faq" class="nav-link">FAQ</a>
-    <a href="contact.html" class="nav-link nav-cta active">Book a Session</a>
+    <a href="about.html" class="nav-link" data-i18n="nav_about">About</a>
+    <a href="services.html" class="nav-link" data-i18n="nav_services">Services</a>
+    <a href="blog.html" class="nav-link" data-i18n="nav_blog">Blog</a>
+    <a href="index.html#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
+    <button id="langToggle" onclick="I18N.toggle()" style="background:transparent;border:1.5px solid var(--blue-light);color:var(--blue);border-radius:var(--radius-pill);padding:7px 16px;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;margin-right:4px" aria-label="Mudar para Português">PT</button><a href="contact.html" class="nav-link nav-cta active" data-i18n="nav_book">Book a Session</a>
   </div>
 </nav>
 
@@ -243,8 +243,8 @@ textarea.form-input{resize:vertical;min-height:72px}
 
         <!-- STEP 1: Service -->
         <div class="form-step active" id="step1">
-          <div class="form-title">Choose a service</div>
-          <div class="form-subtitle">What do you need help with?</div>
+          <div class="form-title" data-i18n="step1_title">Choose a service</div>
+          <div class="form-subtitle" data-i18n="step1_sub">What do you need help with?</div>
           <div class="service-options" id="serviceOptions">
             <div class="service-opt" data-service="Live Interpretation" data-price="65" data-unit="hr" onclick="selectService(this)">
               <span class="so-emoji">🎙️</span>
@@ -296,8 +296,8 @@ textarea.form-input{resize:vertical;min-height:72px}
 
         <!-- STEP 2: Date + Time + Info (combined) -->
         <div class="form-step" id="step2">
-          <div class="form-title">When & who</div>
-          <div class="form-subtitle">Pick a date, time, and tell us about yourself.</div>
+          <div class="form-title" data-i18n="step2_title">When & who</div>
+          <div class="form-subtitle" data-i18n="step2_sub">Pick a date, time, and tell us about yourself.</div>
 
           <!-- Date strip -->
           <div style="margin-bottom:8px">
@@ -315,27 +315,27 @@ textarea.form-input{resize:vertical;min-height:72px}
           <!-- Contact info -->
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">First Name *</label>
+              <label class="form-label" data-i18n="label_fname">First Name</label>
               <input type="text" class="form-input" id="fname" placeholder="Jane">
             </div>
             <div class="form-group">
-              <label class="form-label">Last Name *</label>
+              <label class="form-label" data-i18n="label_lname">Last Name</label>
               <input type="text" class="form-input" id="lname" placeholder="Doe">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Email *</label>
+              <label class="form-label" data-i18n="label_email">Email</label>
               <input type="email" class="form-input" id="email" placeholder="jane@email.com">
             </div>
             <div class="form-group">
-              <label class="form-label">Phone</label>
+              <label class="form-label" data-i18n="label_phone">Phone</label>
               <input type="tel" class="form-input" id="phone" placeholder="(555) 555-5555">
             </div>
           </div>
           <div class="form-row full">
             <div class="form-group">
-              <label class="form-label">Notes for Stael (optional)</label>
+              <label class="form-label" data-i18n="label_notes">Notes for Stael (optional)</label>
               <textarea class="form-input" id="notes" placeholder="Any details, requirements, or questions..."></textarea>
             </div>
           </div>
@@ -348,8 +348,8 @@ textarea.form-input{resize:vertical;min-height:72px}
 
         <!-- STEP 3: Review & Pay -->
         <div class="form-step" id="step3">
-          <div class="form-title">Review & confirm</div>
-          <div class="form-subtitle">Everything looks good? Let's get you booked.</div>
+          <div class="form-title" data-i18n="step3_title">Review & confirm</div>
+          <div class="form-subtitle" data-i18n="step3_sub">Everything looks good? Let's get you booked.</div>
 
           <div class="review-card" id="reviewDetails"></div>
 
@@ -365,7 +365,7 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="order-summary">
         <div class="os-card">
           <div class="os-header">
-            <div class="os-title">Booking Summary</div>
+            <div class="os-title" data-i18n="summary_title">Booking Summary</div>
             <div class="os-step-badge" id="osBadge">Step 1 of 3</div>
           </div>
           <div class="os-rows">
@@ -639,5 +639,6 @@ async function submitBooking(){
   if(email){const em=document.getElementById('email');if(em)em.value=email;}
 })();
 </script>
+<script src="/lang.js"></script>
 </body>
 </html>

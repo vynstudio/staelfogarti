@@ -650,10 +650,10 @@ a { text-decoration: none; color: inherit; }
   </button>
   <div class="nav-menu" id="navMenu">
     <a href="about.html" class="nav-link active">About</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="blog.html" class="nav-link">Blog</a>
-    <a href="index.html#faq" class="nav-link">FAQ</a>
-    <a href="contact.html" class="nav-link nav-cta">Book a Session</a>
+    <a href="services.html" class="nav-link" data-i18n="nav_services">Services</a>
+    <a href="blog.html" class="nav-link" data-i18n="nav_blog">Blog</a>
+    <a href="index.html#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
+    <button id="langToggle" onclick="I18N.toggle()" style="background:transparent;border:1.5px solid var(--blue-light);color:var(--blue);border-radius:var(--radius-pill);padding:7px 16px;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer;transition:all 0.25s;margin-right:4px" aria-label="Mudar para Português">PT</button><a href="contact.html" class="nav-link nav-cta" data-i18n="nav_book">Book a Session</a>
   </div>
 </nav>
 
@@ -994,5 +994,6 @@ revealEls.forEach(el => observer.observe(el));
 <script>
 fetch("chatbot.html").then(r=>r.text()).then(html=>{const d=document.createElement("div");d.innerHTML=html;document.body.appendChild(d);const scripts=d.querySelectorAll("script");scripts.forEach(s=>{const ns=document.createElement("script");ns.textContent=s.textContent;document.body.appendChild(ns);});});
 </script>
+<script src="/lang.js"></script>
 </body>
 </html>
