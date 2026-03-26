@@ -35,23 +35,27 @@ exports.handler = async (event) => {
     let meetLink = null;
     let calendarEventLink = null;
 
-    // ── Google Auth ──
+    // ── Google Auth (Service Account with domain-wide delegation) ──
     let googleAuth = null;
     if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
       try {
         const saKey = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-        googleAuth = new google.auth.GoogleAuth({
-          credentials: saKey,
+        const impersonate = process.env.GOOGLE_IMPERSONATE || STAEL_EMAIL;
+        // Use JWT for impersonation — required for domain-wide delegation
+        googleAuth = new google.auth.JWT({
+          email: saKey.client_email,
+          key: saKey.private_key,
           scopes: [
             'https://www.googleapis.com/auth/calendar',
             'https://www.googleapis.com/auth/gmail.send',
           ],
-          clientOptions: {
-            subject: process.env.GOOGLE_IMPERSONATE || STAEL_EMAIL,
-          },
+          subject: impersonate,
         });
+        await googleAuth.authorize();
+        console.log('✓ Google auth OK — impersonating', impersonate);
       } catch (e) {
         console.error('Google auth error:', e.message);
+        googleAuth = null;
       }
     }
 

@@ -35,13 +35,15 @@ exports.handler = async (event) => {
       };
     }
 
-    // Auth
+    // Auth — JWT with domain-wide delegation impersonation
     const saKey = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    const auth = new google.auth.GoogleAuth({
-      credentials: saKey,
+    const auth = new google.auth.JWT({
+      email: saKey.client_email,
+      key: saKey.private_key,
       scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
-      clientOptions: { subject: calendarId },
+      subject: calendarId,
     });
+    await auth.authorize();
 
     const calendar = google.calendar({ version: 'v3', auth });
 
