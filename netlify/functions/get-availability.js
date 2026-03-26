@@ -8,9 +8,9 @@
 
 const { google } = require('googleapis');
 
-const WORK_HOURS = { start: 9, end: 17 }; // 9am - 5pm ET
+const WORK_HOURS = { start: 8, end: 20 }; // 8am - 8pm ET
 const SLOT_DURATION = 60; // minutes
-const TIME_SLOTS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+const TIME_SLOTS = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
 const TIMEZONE = 'America/New_York';
 
 exports.handler = async (event) => {
@@ -70,7 +70,7 @@ exports.handler = async (event) => {
 
     for (let i = 0; i < daysAhead; i++) {
       // Skip Sundays
-      if (d.getDay() === 0 || d.getDay() === 6) { d.setDate(d.getDate() + 1); continue; }
+      if (d.getDay() === 0) { d.setDate(d.getDate() + 1); continue; } // Skip Sundays only
 
       const dateKey = d.toISOString().split('T')[0];
       const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: TIMEZONE });
@@ -149,7 +149,7 @@ function getMockAvailability(daysAhead) {
   let count = 0;
 
   while (count < daysAhead) {
-    if (d.getDay() !== 0 && d.getDay() !== 6) {
+    if (d.getDay() !== 0) { // Mon-Sat
       const dateKey = d.toISOString().split('T')[0];
       const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       availability[dateKey] = { label: dayLabel, slots: TIME_SLOTS };

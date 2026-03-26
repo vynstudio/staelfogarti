@@ -79,13 +79,14 @@ a{text-decoration:none;color:inherit}
 .form-subtitle{font-size:0.88rem;color:var(--text-muted);margin-bottom:24px;line-height:1.5}
 
 /* SERVICE CARDS — bigger, icon-forward */
-.service-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.service-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
 .service-opt{padding:20px 18px;border-radius:var(--radius-lg);border:2px solid var(--border);background:var(--bg);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
 .service-opt:hover{border-color:var(--blue-light);background:var(--blue-wash);transform:translateY(-2px)}
 .service-opt.selected{border-color:var(--blue);background:var(--blue-wash);box-shadow:0 0 0 3px rgba(91,142,201,0.15)}
 .service-opt.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;line-height:22px;text-align:center}
 .so-emoji{font-size:1.8rem;margin-bottom:10px;display:block}
 .so-name{font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px}
+.so-summary{font-size:0.76rem;color:var(--text-muted);line-height:1.45;margin-bottom:8px}
 .so-price{font-size:0.8rem;color:var(--text-muted);font-weight:600}
 .so-badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:var(--radius-pill);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
 .so-badge.blue{background:var(--blue-wash);color:var(--blue-deep)}
@@ -248,32 +249,44 @@ textarea.form-input{resize:vertical;min-height:72px}
             <div class="service-opt" data-service="Live Interpretation" data-price="65" data-unit="hr" onclick="selectService(this)">
               <span class="so-emoji">🎙️</span>
               <div class="so-name">Live Interpretation</div>
+              <div class="so-summary">Real-time EN↔PT for meetings, conferences & events. I come to you.</div>
               <div class="so-price">$65 / hr</div>
               <span class="so-badge blue">In-Person</span>
             </div>
             <div class="service-opt" data-service="Virtual Session" data-price="55" data-unit="hr" onclick="selectService(this)">
               <span class="so-emoji">💻</span>
               <div class="so-name">Virtual Session</div>
+              <div class="so-summary">Full interpretation via Google Meet or phone — same quality, anywhere.</div>
               <div class="so-price">$55 / hr</div>
               <span class="so-badge mint">Remote</span>
             </div>
             <div class="service-opt" data-service="Medical Interpretation" data-price="75" data-unit="hr" onclick="selectService(this)">
               <span class="so-emoji">🏥</span>
               <div class="so-name">Medical Interpretation</div>
+              <div class="so-summary">Doctor visits, hospital, therapy & mental health — HIPAA aware.</div>
               <div class="so-price">$75 / hr</div>
               <span class="so-badge lav">Specialized</span>
             </div>
             <div class="service-opt" data-service="Legal Interpretation" data-price="85" data-unit="hr" onclick="selectService(this)">
               <span class="so-emoji">⚖️</span>
               <div class="so-name">Legal Interpretation</div>
+              <div class="so-summary">Courts, depositions, attorney meetings & immigration proceedings.</div>
               <div class="so-price">$85 / hr</div>
               <span class="so-badge blue">Legal</span>
             </div>
-            <div class="service-opt" data-service="Language Coaching" data-price="2" data-unit="session" onclick="selectService(this)">
+            <div class="service-opt" data-service="1/1 Private Lessons" data-price="50" data-unit="session" onclick="selectService(this)">
               <span class="so-emoji">📚</span>
-              <div class="so-name">Language Coaching</div>
+              <div class="so-name">1/1 Private Lessons</div>
+              <div class="so-summary">Personalized EN or PT lessons — all levels, conversation & culture.</div>
               <div class="so-price">$50 / session</div>
               <span class="so-badge peach">Teaching</span>
+            </div>
+            <div class="service-opt" data-service="Immigration & Citizenship Prep" data-price="60" data-unit="session" onclick="selectService(this)">
+              <span class="so-emoji">🇺🇸</span>
+              <div class="so-name">Immigration & Citizenship Prep</div>
+              <div class="so-summary">Green card interviews, citizenship test prep & USCIS guidance.</div>
+              <div class="so-price">$60 / session</div>
+              <span class="so-badge mint">Immigration</span>
             </div>
           </div>
           <div class="form-btns">
@@ -409,7 +422,7 @@ textarea.form-input{resize:vertical;min-height:72px}
         <li><a href="services/virtual-sessions.html">Virtual Sessions</a></li>
         <li><a href="services/medical-interpretation.html">Medical Interpretation</a></li>
         <li><a href="services/legal-interpretation.html">Legal Interpretation</a></li>
-        <li><a href="services/language-coaching.html">Language Coaching</a></li>
+        <li><a href="services/language-coaching.html">1/1 Private Lessons</a></li>
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul class="footer-links">
         <li><a href="about.html">About</a></li>
