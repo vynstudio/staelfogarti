@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://staelfogarty.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://staelfogarty.com/about.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://staelfogarty.com/services.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://staelfogarty.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://staelfogarty.com/blog.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://staelfogarty.com/services/live-interpretation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/services/document-translation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/services/virtual-sessions.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/services/medical-interpretation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/services/legal-interpretation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/services/language-coaching.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://staelfogarty.com/blog/why-brazilians-orlando-need-interpreter.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/documents-translated-uscis.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/how-virtual-interpretation-works.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/medical-appointment-interpreter-tips.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/legal-rights-interpreter.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/portuguese-phrases-english-speakers.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/blog/working-brazilian-clients-culture-tips.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://staelfogarty.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://staelfogarty.com/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://staelfogarty.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://staelfogarty.com/contact</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://staelfogarty.com/lessons</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://staelfogarty.com/interpretation</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://staelfogarty.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://staelfogarty.com/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://staelfogarty.com/blog/why-brazilians-orlando-need-interpreter</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/documents-translated-uscis</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/how-virtual-interpretation-works</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/medical-appointment-interpreter-tips</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/legal-rights-interpreter</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/portuguese-phrases-english-speakers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/blog/working-brazilian-clients-culture-tips</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://staelfogarty.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://staelfogarty.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

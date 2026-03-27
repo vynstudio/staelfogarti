@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /netlify/
+Disallow: /changes
+Disallow: /tracking.html
+Disallow: /chatbot.html
+
 Sitemap: https://staelfogarty.com/sitemap.xml

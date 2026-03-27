@@ -65,7 +65,7 @@ exports.handler = async (event) => {
       try {
         const calendar = google.calendar({ version: 'v3', auth: googleAuth, headers: { 'x-goog-user-project': saKey.project_id } });
         const startISO = parseDateTime(date, time);
-        const duration = service === 'Language Coaching' ? 60 : 90;
+        const duration = service === 'One-on-One Private Lessons' ? 60 : 90;
         const endISO = new Date(new Date(startISO).getTime() + duration * 60000).toISOString();
 
         const eventBody = {
