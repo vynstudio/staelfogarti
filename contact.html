@@ -79,8 +79,8 @@ a{text-decoration:none;color:inherit}
 .form-subtitle{font-size:0.88rem;color:var(--text-muted);margin-bottom:24px;line-height:1.5}
 
 /* SERVICE CARDS — bigger, icon-forward */
-.service-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
-.service-opt{padding:20px 18px;border-radius:var(--radius-lg);border:2px solid var(--border);background:var(--bg);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
+.service-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.service-opt{padding:22px 20px;border-radius:var(--radius-lg);border:2px solid var(--border);background:var(--bg);cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
 .service-opt:hover{border-color:var(--blue-light);background:var(--blue-wash);transform:translateY(-2px)}
 .service-opt.selected{border-color:var(--blue);background:var(--blue-wash);box-shadow:0 0 0 3px rgba(91,142,201,0.15)}
 .service-opt.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;line-height:22px;text-align:center}
@@ -569,6 +569,8 @@ function selectService(el){
   if(disp) disp.textContent=B.hours;
   if(total) total.textContent='$'+(B.pricePerHr*B.hours).toFixed(0);
   updateSummary();
+  // Auto-advance to step 2 after short delay
+  setTimeout(()=>goStep(2), 400);
 }
 function selectDate(el){
   document.querySelectorAll('.date-chip').forEach(o=>o.classList.remove('selected'));
