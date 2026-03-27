@@ -95,16 +95,20 @@ a{text-decoration:none;color:inherit}
 .so-badge.peach{background:var(--peach-wash);color:var(--peach-deep)}
 
 /* DATE PICKER — horizontal scroll strip */
-.date-strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;margin-bottom:24px;scrollbar-width:none}
-.date-strip::-webkit-scrollbar{display:none}
-.date-chip{flex-shrink:0;padding:14px 18px;border-radius:var(--radius-md);border:2px solid var(--border);background:var(--bg);cursor:pointer;text-align:center;transition:all 0.2s;min-width:72px}
-.date-chip:hover{border-color:var(--blue-light);background:var(--blue-wash)}
-.date-chip.selected{border-color:var(--blue);background:var(--blue);color:white}
-.date-chip .dc-day{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7;margin-bottom:4px}
-.date-chip.selected .dc-day{opacity:0.85}
-.date-chip .dc-num{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:800;line-height:1;margin-bottom:2px}
-.date-chip .dc-mon{font-size:0.7rem;font-weight:600;opacity:0.7}
-.date-chip.selected .dc-mon{opacity:0.85}
+.cal-wrap{margin-bottom:24px}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-header h4{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:800;color:var(--dark)}
+.cal-nav{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-muted);transition:all .2s}
+.cal-nav:hover{border-color:var(--blue-light);background:var(--blue-wash);color:var(--blue)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{text-align:center;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);padding:6px 0}
+.cal-day{aspect-ratio:1;border-radius:8px;border:1.5px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:600;cursor:default;color:var(--text-muted);transition:all .2s;position:relative}
+.cal-day.available{border-color:var(--border);background:var(--bg);color:var(--text);cursor:pointer}
+.cal-day.available:hover{border-color:var(--blue-light);background:var(--blue-wash);color:var(--blue)}
+.cal-day.selected{border-color:var(--blue);background:var(--blue);color:#fff!important}
+.cal-day.today{font-weight:800}
+.cal-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--blue)}
+.cal-day.selected::after{background:#fff}
 
 /* TIME PICKER — pill grid */
 .time-label{font-size:0.82rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px}
@@ -197,9 +201,8 @@ textarea.form-input{resize:vertical;min-height:72px}
   .so-emoji{font-size:1.4rem;margin-bottom:6px}
   .time-grid{grid-template-columns:repeat(3,1fr);gap:6px}
   .time-chip{padding:10px 6px;font-size:.78rem}
-  .date-strip{gap:6px}
-  .date-chip{padding:10px 12px;min-width:58px}
-  .date-chip .dc-num{font-size:1.1rem}
+  .cal-grid{gap:3px}
+  .cal-day{font-size:.82rem}
   .form-row{grid-template-columns:1fr}
   .booking-form-card{padding:24px 18px}
   .page-hero{padding:100px 16px 36px}
@@ -349,10 +352,19 @@ textarea.form-input{resize:vertical;min-height:72px}
           <div class="form-title" data-i18n="step2_title">When & who</div>
           <div class="form-subtitle" data-i18n="step2_sub">Pick a date, time, and tell us about yourself.</div>
 
-          <!-- Date strip -->
-          <div style="margin-bottom:8px">
-            <div class="time-label">Select a date</div>
-            <div class="date-strip" id="dateStrip"></div>
+          <!-- Calendar picker -->
+          <div class="cal-wrap">
+            <div class="time-label" style="margin-bottom:12px">Select a date</div>
+            <div class="cal-header">
+              <button class="cal-nav" id="calPrev" onclick="calNav(-1)" type="button">‹</button>
+              <h4 id="calTitle"></h4>
+              <button class="cal-nav" id="calNext" onclick="calNav(1)" type="button">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid">
+              <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
+              <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div>
+              <div class="cal-dow">Sat</div>
+            </div>
           </div>
 
           <!-- Time grid -->
@@ -513,37 +525,97 @@ toggle.addEventListener('click',()=>{
 // ── Availability (from Google Calendar) ──
 let availabilityData = {};
 
+let calYear, calMonth;
+
+function renderCalendar(){
+  const grid = document.getElementById('calGrid');
+  const title = document.getElementById('calTitle');
+  // Remove day cells (keep DOW headers = first 7)
+  while(grid.children.length > 7) grid.removeChild(grid.lastChild);
+
+  title.textContent = new Date(calYear, calMonth).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const today = new Date(); today.setHours(0,0,0,0);
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+
+  // Empty cells before first day
+  for(let i=0;i<firstDay;i++){
+    const empty=document.createElement('div');
+    empty.className='cal-day';
+    grid.appendChild(empty);
+  }
+
+  for(let d=1;d<=daysInMonth;d++){
+    const date = new Date(calYear, calMonth, d);
+    date.setHours(0,0,0,0);
+    const key = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cell = document.createElement('div');
+    cell.textContent = d;
+
+    const isAvailable = availabilityData[key] && date > today;
+    const isToday = date.getTime()===today.getTime();
+
+    if(isAvailable){
+      cell.className='cal-day available'+(isToday?' today':'');
+      cell.dataset.date=key;
+      cell.dataset.display=availabilityData[key].label;
+      cell.dataset.slots=JSON.stringify(availabilityData[key].slots);
+      cell.onclick=()=>selectCalDay(cell);
+    } else {
+      cell.className='cal-day'+(isToday?' today':'');
+    }
+
+    if(B.date===key) cell.classList.add('selected');
+    grid.appendChild(cell);
+  }
+
+  // Nav buttons
+  const now = new Date(); 
+  document.getElementById('calPrev').disabled = (calYear===now.getFullYear()&&calMonth<=now.getMonth());
+}
+
+function calNav(delta){
+  calMonth+=delta;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
+}
+
+function selectCalDay(el){
+  document.querySelectorAll('.cal-day').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  B.date=el.dataset.date;
+  B.dateDisplay=el.dataset.display;
+  const slots=el.dataset.slots?JSON.parse(el.dataset.slots):null;
+  buildTimeSlots(slots);
+  B.time=null;
+  updateSummary();
+}
+
 async function loadAvailability(){
-  const strip=document.getElementById('dateStrip');
-  strip.innerHTML='<div style="padding:14px 4px;color:var(--text-muted);font-size:0.85rem">Loading availability...</div>';
+  const grid=document.getElementById('calGrid');
   try{
     const res=await fetch('/.netlify/functions/get-availability');
     const data=await res.json();
     availabilityData=data.availability||{};
-    strip.innerHTML='';
-    const dateKeys=Object.keys(availabilityData).sort();
-    if(dateKeys.length===0){
-      strip.innerHTML='<div style="padding:14px 4px;color:var(--text-muted);font-size:0.85rem">No availability found. Please contact hello@staelfogarty.com.</div>';
-      return;
+    const now=new Date();
+    calYear=now.getFullYear();
+    calMonth=now.getMonth();
+    renderCalendar();
+    // Auto-select first available date
+    const firstKey=Object.keys(availabilityData).sort()[0];
+    if(firstKey){
+      const firstDate=new Date(firstKey+'T12:00:00');
+      calYear=firstDate.getFullYear();
+      calMonth=firstDate.getMonth();
+      renderCalendar();
+      const firstCell=document.querySelector(`.cal-day.available[data-date="${firstKey}"]`);
+      if(firstCell)selectCalDay(firstCell);
     }
-    dateKeys.forEach(key=>{
-      const day=availabilityData[key];
-      const d=new Date(key+'T12:00:00');
-      const el=document.createElement('div');
-      el.className='date-chip';
-      el.dataset.date=key;
-      el.dataset.display=day.label;
-      el.dataset.slots=JSON.stringify(day.slots);
-      el.innerHTML=`<div class="dc-day">${d.toLocaleDateString('en-US',{weekday:'short'})}</div><div class="dc-num">${d.getDate()}</div><div class="dc-mon">${d.toLocaleDateString('en-US',{month:'short'})}</div>`;
-      el.onclick=()=>selectDate(el);
-      strip.appendChild(el);
-    });
-    // Pre-select first available date
-    const first=strip.querySelector('.date-chip');
-    if(first)selectDate(first);
   }catch(e){
     console.error('Availability error:',e);
-    strip.innerHTML='<div style="padding:14px 4px;color:var(--text-muted);font-size:0.85rem">Could not load availability. Please contact hello@staelfogarty.com.</div>';
+    const title=document.getElementById('calTitle');
+    if(title)title.textContent='Could not load — contact hello@staelfogarty.com';
   }
 }
 loadAvailability();
@@ -592,14 +664,7 @@ function selectService(el){
   updateSummary();
 }
 function selectDate(el){
-  document.querySelectorAll('.date-chip').forEach(o=>o.classList.remove('selected'));
-  el.classList.add('selected');
-  B.date=el.dataset.date;B.dateDisplay=el.dataset.display;
-  // Update time slots for this date
-  const slots=el.dataset.slots?JSON.parse(el.dataset.slots):null;
-  buildTimeSlots(slots);
-  B.time=null; // reset time selection
-  updateSummary();
+  selectCalDay(el);
 }
 
 function buildTimeSlots(slots){
