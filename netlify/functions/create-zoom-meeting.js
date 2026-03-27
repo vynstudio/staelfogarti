@@ -13,7 +13,7 @@
 const { google } = require('googleapis');
 const { Resend } = require('resend');
 
-const VIRTUAL_SERVICES = ['Remote Interpretation', 'One-on-One Private Lessons', 'Educational Interpretation', 'Legal Services'];
+const VIRTUAL_SERVICES = ['Remote Interpretation', 'One-on-One Private Lessons', 'Educational Interpretation', 'Legal Interpretation'];
 const STAEL_EMAIL = process.env.STAEL_EMAIL || 'hello@staelfogarty.com';
 
 exports.handler = async (event) => {
